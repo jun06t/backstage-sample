@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: backstage-sample
+  annotations:
+    github.com/project-slug: jun06t/backstage-sample
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - typescript
+    - backstage
+  links:
+    - url: https://github.com/jun06t/backstage-sample
+      title: project repository
+      icon: github
+spec:
+  type: service
+  owner: guests
+  lifecycle: production
