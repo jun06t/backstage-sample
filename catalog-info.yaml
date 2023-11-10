@@ -1,3 +1,38 @@
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-system
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: jun06t
+spec:
+  owner: backend
+---
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-api
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: api-gateway
+  namespace: default
+  annotations:
+    github.com/project-slug: jun06t/backstage-sample
+    backstage.io/techdocs-ref: dir:./gateway
+  tags:
+    - go
+spec:
+  type: grpc
+  lifecycle: production
+  owner: guests
+  system: jun06t
+  definition: |
+    syntax = "proto3";
+
+    service Exampler {
+      rpc Example (ExampleMessage) returns (ExampleMessage) {};
+    }
+
+    message ExampleMessage {
+      string example = 1;
+    };
+---
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
@@ -16,3 +51,42 @@ spec:
   type: service
   owner: guests
   lifecycle: production
+---
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-component
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: user
+  description: User service
+  namespace: default
+  annotations:
+    github.com/project-slug: jun06t/backstage-sample
+    backstage.io/techdocs-ref: dir:./user
+  tags:
+    - go
+  links:
+    - url: https://github.com/jun06t/backstage-sample
+      title: Repo
+      icon: github
+spec:
+  type: service
+  owner: guests
+  system: jun06t
+  lifecycle: production
+  providesApis: [api-gateway]
+  dependsOn:
+    - resource:default/user-db
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: user-db
+  description: Stores user details
+  annotations:
+    backstage.io/techdocs-ref: dir:./user/db
+  tags:
+    - mongodb
+spec:
+  type: database
+  owner: guests
+  system: jun06t
