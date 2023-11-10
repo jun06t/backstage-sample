@@ -14,7 +14,7 @@ metadata:
   namespace: default
   annotations:
     github.com/project-slug: jun06t/backstage-sample
-    backstage.io/techdocs-ref: dir:./gateway
+    backstage.io/techdocs-ref: dir:./docs/gateway
   tags:
     - go
 spec:
@@ -61,7 +61,7 @@ metadata:
   namespace: default
   annotations:
     github.com/project-slug: jun06t/backstage-sample
-    backstage.io/techdocs-ref: dir:./user
+    backstage.io/techdocs-ref: dir:./docs/user
   tags:
     - go
   links:
@@ -83,7 +83,7 @@ metadata:
   name: user-db
   description: Stores user details
   annotations:
-    backstage.io/techdocs-ref: dir:./user/db
+    backstage.io/techdocs-ref: dir:./docs/user/db
   tags:
     - mongodb
 spec:
